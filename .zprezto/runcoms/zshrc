@@ -1,0 +1,52 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+alias em="emacsclient -c -a ''"
+
+# Note that in [~/.ignore], various things like [.git/] and [.hg/] are ignored.
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS='--height 96% --preview "cat {}"'
+
+alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+fzf_exec_if_nonempty() {
+    f=$(fzf)
+    if [[ "$f" != "" ]] then
+        $1 $f
+    fi
+}
+
+vf() { fzf_exec_if_nonempty vim }
+
+cf() { fzf_exec_if_nonempty code }
+
+cdf() {
+    local f
+    if [ -n "$1" ]; then
+        f="$1"
+    else
+        f=$(fzf)
+    fi
+    cd $(dirname "$f")
+}
+
+bindkey '^ ' autosuggest-accept
+bindkey '^L' forward-word
+bindkey '^H' backward-word
+bindkey '^A' vi-beginning-of-line
+bindkey '^E' vi-end-of-line
+bindkey "^R" history-incremental-search-backward
+
+# Pressing [ESC] will enter vim mode; this gives it a 0.1 timeout to transition
+# into vim mode vs the default 0.4
+export KEYTIMEOUT=1
