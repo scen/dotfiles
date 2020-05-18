@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+feh --bg-fill ~/Pictures/bird.jpg
+
+xset r rate 200 40
+
+# make sure to run *after*, not *before* setting the background
+compton --config ~/.config/compton/compton.conf &
+
+exec xmonad "$@"

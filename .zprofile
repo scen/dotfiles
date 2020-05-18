@@ -1,0 +1,1 @@
+/home/scen/.zprezto/runcoms/zprofile

@@ -1,0 +1,125 @@
+{
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "workbench.activityBar.visible": false,
+    "keyboard.dispatch": "keyCode",
+    "editor.fontFamily": "Source Code Pro Semibold",
+    "editor.fontSize": 16,
+    "editor.acceptSuggestionOnEnter": "off",
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "explorer.confirmDelete": false,
+    "editor.scrollBeyondLastLine": true,
+    "vim.leader": "<space>",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "u"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "undo",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [
+                "<C-r>"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "redo",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "f",
+                "s"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "e",
+                "n"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.action.marker.next",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "e",
+                "n"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "actions.find",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "1",
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.focusFirstEditorGroup",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "2",
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.focusSecondEditorGroup",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "vim.useSystemClipboard": true,
+    "vim.handleKeys": {
+        "<C-d>": true,
+        "<C-b>": false,
+        "<C-w>": false,
+        "<C-n>": false,
+        "<C-o>": false
+    },
+    "window.menuBarVisibility": "toggle",
+    "customizeUI.font.monospace": "Source Code Pro Semibold",
+    "customizeUI.font.regular": "Source Code Pro Semibold",
+    "editor.minimap.enabled": false,
+    "window.zoomLevel": 0.1,
+    "editor.lineNumbers": "on",
+    "workbench.iconTheme": "vs-minimal",
+    "editor.renderIndentGuides": false,
+    "editor.cursorBlinking": "solid"
+    // "editor.glyphMargin": false
+}

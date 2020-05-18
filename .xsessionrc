@@ -1,0 +1,5 @@
+#!/bin/zsh 
+
+# keyboard rate + delay
+xset r rate 250 40
+setxkbmap -option caps:escape

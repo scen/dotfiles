@@ -1,0 +1,6 @@
+#!/bin/zsh
+set -e
+
+pkill -x polybar || true
+while pgrep -x polybar >/dev/null; do sleep 1; done
+polybar top &
