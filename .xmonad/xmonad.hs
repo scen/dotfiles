@@ -34,6 +34,8 @@ import           XMonad.Actions.GroupNavigation
 import           XMonad.Layout.Fullscreen
 import           XMonad.Util.Cursor
 
+import qualified XMonad.StackSet               as W
+
 -- https://www.reddit.com/r/xmonad/comments/e9ivu/xmonad_compositing_a_quick_howto_on_ubuntu/
 -- https://xiangji.me/2018/11/19/my-xmonad-configuration/
 
@@ -72,6 +74,7 @@ splitGrid orientation = SplitGrid orientation
   masterRatio = case orientation of
     L -> 6 / 10
     T -> 5 / 8
+    B -> 5 / 8
     _ -> 1 / 2
   aspect    = goldenRatio
   increment = 3 / 100
@@ -95,10 +98,10 @@ instance SetsAmbiguous MyAmbiguity where
     1 -> map fst wrs
     _ -> []
 
-splitGridLOrT =
+splitGridAutoRotate =
 -- gaps $
-                lessBorders HideBorderWhenSingleWindow
-  $ ifWider threshold (splitGrid L) (splitGrid T)
+                      lessBorders HideBorderWhenSingleWindow
+  $ ifWider threshold (splitGrid L) (splitGrid B)
   where
     -- differentiates between landscape & portrait 4k monitors
         threshold = 3000
@@ -119,7 +122,8 @@ myTabConfig = def { activeTextColor     = "#ebdbb2"
                   , fontName            = "xft:Source Code Pro Semibold:size=9"
                   }
 
-myLayoutHook = avoidStruts $ named "grid" splitGridLOrT ||| named "tabs" tabs
+myLayoutHook =
+  avoidStruts $ named "grid" splitGridAutoRotate ||| named "tabs" tabs
   where tabs = noBorders $ tabbedBottom shrinkText myTabConfig
   -- where tabs = tabbedBottom shrinkText myTabConfig
 
@@ -130,7 +134,7 @@ myStartupHook =
     <+> spawn "~/.bin/start-polybar"
     <+> setDefaultCursor xC_left_ptr
 
-myWorkspaces = ["1.dev", "2.www", "3:misc", "4.im", "5", "6", "7", "8", "9"]
+myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 
 ppWorkspaces ws = io $ appendFile workspaceLogFile (ws ++ "\n")
@@ -167,6 +171,12 @@ myLogPP = dynamicLogWithPP $ def { ppTitle   = const ""
 
 runZsh cmd = safeSpawn "zsh" ["-i", "-c", cmd]
 
+toggleScreen = windows
+  (\ws -> case W.visible ws of
+    [x] -> let (W.Screen (W.Workspace tag _ _) _ _) = x in W.view tag ws
+    _   -> ws
+  )
+
 additionalBindings :: [(String, X ())]
 additionalBindings =
   [ ("M-S-p c"      , spawn "google-chrome")
@@ -177,14 +187,17 @@ additionalBindings =
   , ("M-p"          , safeSpawn "rofi" ["-show", "window"])
   , ("M-<Escape>"   , safeSpawn (home ".bin/lock.sh") [])
   , ("M1-C-<Delete>", safeSpawn (home ".bin/power.sh") [])
+  , ("M-`"          , windows W.focusDown)
+  , ("M-S-`"        , windows W.focusUp)
+  , ("M-<Tab>"      , toggleScreen)
   , ( "M1-<Tab>"
     , nextMatch History (return True)
     ) -- "alt tab"
   , ( "<XF86AudioLowerVolume>"
-    , safeSpawn "pactl" ["set-sink-volume", "@DEFAULT_SINK@", "-5%"]
+    , safeSpawn "pactl" ["set-sink-volume", "@DEFAULT_SINK@", "-1%"]
     )
   , ( "<XF86AudioRaiseVolume>"
-    , safeSpawn "pactl" ["set-sink-volume", "@DEFAULT_SINK@", "+5%"]
+    , safeSpawn "pactl" ["set-sink-volume", "@DEFAULT_SINK@", "+1%"]
     )
   , ( "<XF86AudioMute>"
     , safeSpawn "pactl" ["set-sink-mute", "@DEFAULT_SINK@", "toggle"]
@@ -192,8 +205,9 @@ additionalBindings =
   ]
 
 myBorderWidth = 10
-myNormalBorderColor = "#2b303b"
+-- myNormalBorderColor = "#2b303b"
 -- myNormalBorderColor = "#282828"
+myNormalBorderColor = "#222222"
 -- myNormalBorderColor = "#3c3836"
 myFocusedBorderColor = "#bf616a" -- nice red
 

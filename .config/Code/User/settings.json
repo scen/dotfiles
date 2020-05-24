@@ -110,16 +110,22 @@
         "<C-b>": false,
         "<C-w>": false,
         "<C-n>": false,
-        "<C-o>": false
+        "<C-o>": false,
+        "<C-f>": false,
     },
     "window.menuBarVisibility": "toggle",
     "customizeUI.font.monospace": "Source Code Pro Semibold",
     "customizeUI.font.regular": "Source Code Pro Semibold",
     "editor.minimap.enabled": false,
-    "window.zoomLevel": 0.1,
+    "window.zoomLevel": 0,
     "editor.lineNumbers": "on",
     "workbench.iconTheme": "vs-minimal",
     "editor.renderIndentGuides": false,
-    "editor.cursorBlinking": "solid"
+    "editor.cursorBlinking": "solid",
+    "terminal.integrated.inheritEnv": false,
     // "editor.glyphMargin": false
+    "python.linting.pylintArgs": [
+        "--errors-only",
+        "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
+    ]
 }

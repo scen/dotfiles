@@ -50,3 +50,18 @@ bindkey "^R" history-incremental-search-backward
 # Pressing [ESC] will enter vim mode; this gives it a 0.1 timeout to transition
 # into vim mode vs the default 0.4
 export KEYTIMEOUT=1
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/scen/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/scen/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/scen/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/scen/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<

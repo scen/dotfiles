@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+cd $(dirname $0)
+
 confirm() {
     [[ $(echo -e "no,yes" | rofi -sep , -dmenu -i -p "confirm" -l 2 -width -20) == "yes" ]]
 }

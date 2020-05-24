@@ -60,10 +60,10 @@ font-1 = siji:pixelsize=10;1
 
 modules-left = workspaces-xmonad
 modules-center = xwindow
-modules-right = eth pulseaudio memory cpu date 
+modules-right = eth pulseaudio memory cpu date
 
-; tray-position = right
-; tray-padding = 2
+tray-position = right
+tray-padding = 2
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm
@@ -158,7 +158,7 @@ interval = 3.0
 
 format-connected-prefix = "eth "
 format-connected-prefix-foreground = ${colors.foreground-dim}
-label-connected = %downspeed%
+label-connected = %downspeed% %upspeed%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -176,11 +176,11 @@ date-alt = "%Y-%m-%d"
 time = %H:%M:%S
 time-alt = %H:%M:%S
 
-; format-prefix = 
+; format-prefix =
 ; format-prefix-foreground = ${colors.foreground-dim}
 ; format-underline = #0a6cf5
 
-label = %date%%time% 
+label = %date%%time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
