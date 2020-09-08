@@ -100,8 +100,7 @@ instance SetsAmbiguous MyAmbiguity where
 
 splitGridAutoRotate =
 -- gaps $
-                      lessBorders HideBorderWhenSingleWindow
-  $ ifWider threshold (splitGrid L) (splitGrid B)
+  ifWider threshold (lessBorders HideBorderWhenSingleWindow $ splitGrid L) (splitGrid B)
   where
     -- differentiates between landscape & portrait 4k monitors
         threshold = 3000
@@ -115,7 +114,7 @@ myTabConfig = def { activeTextColor     = "#ebdbb2"
                   , activeBorderWidth   = 0
                   , inactiveBorderWidth = 0
                   , urgentBorderWidth   = 0
-                  , activeColor         = "#303030"
+                  , activeColor         = "#333333"
                   , inactiveColor       = "#282828"
                   , urgentColor         = "#282828"
                   , decoHeight          = 26
